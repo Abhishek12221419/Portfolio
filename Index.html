@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhishek-Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --neon-pink: #ff00ff;
+            --neon-purple: #9d00ff;
+            --text: #f0f0f0;
+            --text-secondary: #b0b0b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--text);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(157, 0, 255, 0.1) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Glowing border animation */
+        @keyframes border-glow {
+            0% { box-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-purple); }
+            50% { box-shadow: 0 0 20px var(--neon-pink), 0 0 40px var(--neon-purple); }
+            100% { box-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-purple); }
+        }
+
+        /* Floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Text glow */
+        .glow-text {
+            text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-purple);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background-color: rgba(10, 10, 10, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: border-glow 3s infinite;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-pink);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 10%;
+            width: 400px;
+            height: 400px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 0 50px rgba(255, 0, 255, 0.3);
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            border-radius: 25px;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.7;
+        }
+
+        .hero-image img {
+            width: 95%;
+            height: 95%;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-icons a {
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--neon-pink);
+            transform: translateY(-5px);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 10%;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--neon-pink);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+            height: 400px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--neon-purple);
+            border-radius: 15px;
+            z-index: -1;
+            animation: border-glow 3s infinite;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.3);
+            border-color: var(--neon-purple);
+        }
+
+        .skill-item i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-pink);
+        }
+
+        .skill-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Resume Section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--neon-pink), var(--neon-purple));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 2rem);
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 2rem);
+            text-align: left;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .timeline-content {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.3);
+            border-color: var(--neon-purple);
+        }
+
+        .timeline-date {
+            color: var(--neon-pink);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+            border-color: var(--neon-pink);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--neon-pink);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tag {
+            background-color: rgba(157, 0, 255, 0.2);
+            color: var(--neon-purple);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-links a:hover {
+            color: var(--neon-pink);
+        }
+
+        /* Certifications Section */
+        .certifications-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .certification-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .certification-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.3);
+            border-color: var(--neon-purple);
+        }
+
+        .certification-icon {
+            font-size: 2.5rem;
+            color: var(--neon-pink);
+        }
+
+        .certification-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .certification-info p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .certification-date {
+            color: var(--neon-purple);
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* Achievements Section */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .achievement-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent,
+                transparent,
+                transparent,
+                rgba(255, 0, 255, 0.1)
+            );
+            transform: rotate(30deg);
+            transition: all 0.6s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+            border-color: var(--neon-pink);
+        }
+
+        .achievement-card:hover::before {
+            transform: rotate(30deg) translate(50px, 50px);
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem;
+            color: var(--neon-purple);
+            margin-bottom: 1rem;
+        }
+
+        .achievement-count {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Summer Training Section */
+        .training-container {
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 3rem;
+        }
+
+        .training-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--neon-pink);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .training-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.3);
+            border-left-color: var(--neon-purple);
+        }
+
+        .training-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .training-title {
+            font-size: 1.3rem;
+            color: var(--neon-pink);
+        }
+
+        .training-date {
+            color: var(--neon-purple);
+            font-weight: 600;
+        }
+
+        .training-company {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .training-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--neon-pink);
+        }
+
+        .contact-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-text p {
+            color: var(--text-secondary);
+        }
+
+        .contact-form {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(10, 10, 10, 0.8);
+            padding: 2rem 10%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--neon-pink);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-social a {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: var(--neon-purple);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            z-index: 99;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero-image {
+                width: 300px;
+                height: 300px;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-image {
+                width: 100%;
+                margin-top: 2rem;
+            }
+
+            .timeline::before {
+                left: 2rem;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: calc(2rem + 20px);
+                padding-right: 0;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                left: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 6rem;
+                height: auto;
+                padding-bottom: 3rem;
+            }
+
+            .hero-content {
+                margin-bottom: 3rem;
+            }
+
+            .hero-image {
+                position: relative;
+                right: auto;
+                margin-top: 2rem;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            section {
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-image {
+                width: 250px;
+                height: 250px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .skills-container {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Abhishek Upadhyay</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#resume">Resume</a>
+            <a href="#projects">Projects</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#achievements">Achievements</a>
+            <a href="#training">Training</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Hi, I'm <span>Abhishek Upadhyay</span></h1>
+            <p>A passionate developer creating innovative solutions with cutting-edge technologies. Specializing in web development,UI/UX and responsive design.</p>
+            <a href="#contact" class="cta-button">Get In Touch</a>
+            
+            <div class="social-icons">
+                <a href="https://github.com/Abhishek12221419" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/abhishek-upadhyay-vats" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://twitter.com/abhishek_24022" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/abhishekupadhyay.24" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="WhatsApp Image 2025-04-27 at 19.16.59_77426d7f.jpg" alt="Your Name">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About <span class="glow-text">Me</span></h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Who am I?</h3>
+                <p>I am a Full Stack Developer with a strong foundation in both front-end and back-end technologies. Proficient in creating dynamic and responsive web applications, I have hands-on experience with the MERN stack (MongoDB, Express.js, React, Node.js).</p>
+                <p>My technical expertise includes working with various algorithms and data structures, as well as developing and implementing complex projects. I have successfully built and deployed multiple web applications, including a Cloud Store website named as Storify where users can store there files and photos.</p>
+                <p> Additionally, I possess strong problem-solving skills, adaptability, and the ability to work effectively within a team. My goal is to continuously improve and leverage my skills to build innovative and efficient web solutions.</p>
+
+                <div class="social-icons">
+                    <a href="https://github.com/Abhishek12221419" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/abhishek-upadhyay-vats" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://twitter.com/abhishek_24022" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/abhishekupadhyay.24" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="Isometric Animation.jpg" alt="About Me">
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">My <span class="glow-text">Skills</span></h2>
+        <div class="skills-container">
+            <div class="skill-item">
+                <i class="fab fa-html5"></i>
+                <h3>HTML</h3>
+                <p>Experienced</p>
+            </div>
+            <div class="skill-item">
+                <i class="fab fa-css3-alt"></i>
+                <h3>CSS</h3>
+                <p>Experienced</p>
+            </div>
+            <div class="skill-item">
+                <i class="fab fa-js"></i>
+                <h3>JavaScript</h3>
+                <p>Experienced</p>
+            </div>
+            <div class="skill-item">
+                <i class="fab fa-react"></i>
+                <h3>React</h3>
+                <p>Intermediate</p>
+            </div>
+            <div class="skill-item">
+                <i class="fab fa-node-js"></i>
+                <h3>Node.js</h3>
+                <p>Intermediate</p>
+            </div>
+            <div class="skill-item">
+                <i class="fas fa-database"></i>
+                <h3>MongoDB</h3>
+                <p>Intermediate</p>
+            </div>
+            <div class="skill-item">
+                <i class="fab fa-cuttlefish"></i>
+                <h3>C++</h3>
+                <p>Intermediate</p>
+            </div>
+            <div class="skill-item">
+                <i class="fab fa-java"></i>
+                <h3>Java</h3>
+                <p>Intermediate</p>
+            </div>
+            <div class="skill-item">
+                <i class="fab fa-php"></i>
+                <h3>PHP</h3>
+                <p>Intermediate</p>
+            </div>
+            <div class="skill-item">
+                <i class="fas fa-leaf"></i> <!-- Spring icon (closest representation) -->
+                <h3>Spring Boot</h3>
+                <p>Intermediate</p> <!-- Adjust skill level as needed -->
+            </div>
+            <div class="skill-item">
+                <i class="fab fa-figma"></i>
+                <h3>Figma</h3>
+                <p>Intermediate</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume">
+        <h2 class="section-title">My <span class="glow-text">Resume</span></h2>
+        <div class="resume-download" style="text-align: center; margin-bottom: 3rem;">
+            <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                <a href="Abhishek New Generalised CV-2.pdf" download="YourName_Resume.pdf" 
+                   class="cta-button" style="padding: 0.8rem 1.5rem;">
+                    <i class="fas fa-file-pdf"></i> PDF Version
+                </a>
+                <a href="Abhishek New Generalised CV-2.docx" download="YourName_Resume.docx" 
+                   class="cta-button" style="padding: 0.8rem 1.5rem;">
+                    <i class="fas fa-file-word"></i> Word Version
+                </a>
+                    <!-- If you want to open in new tab instead of downloading -->
+                <a href="Abhishek New Generalised CV-2.pdf" target="_blank" class="cta-button">
+                    <i class="fas fa-external-link-alt"></i> View Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+<!-- Projects Section -->
+<section id="projects">
+    <h2 class="section-title">My <span class="glow-text">Projects</span></h2>
+    <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card">
+            <div class="project-image">
+                <img src="Dairy-management-system.webp" alt="AI Chatbot Project">
+                <div class="project-overlay">
+                    <h3>Tech Stack</h3>
+                    <div class="tech-tags">
+                        <span>PHP</span>
+                        <span>Laravel</span>
+                        <span>React</span>
+                        <span>Figma</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-info">
+                <h3 class="project-title">Dairy Management System</h3>
+                <p class="project-description">        
+                    Developed a Dairy Management System with separate Admin and User modules. 
+                    Used PHP as the core language and integrated PHP mailer for efficient email handling and dependency management. 
+                </p>
+                <div class="project-links">
+                    <a href="https://github.com/yourusername/ai-chatbot" target="_blank" class="github-link">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                    <a href="https://your-chatbot-demo.com" target="_blank" class="demo-link">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+            <div class="project-image">
+                <img src="people-taking-photos-food.jpg" alt="E-Commerce Platform">
+                <div class="project-overlay">
+                    <h3>Tech Stack</h3>
+                    <div class="tech-tags">
+                        <span>Java</span>
+                        <span>Maven</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-info">
+                <h3 class="project-title">Food Ordering System</h3>
+                <p class="project-description">
+                    Developed a simple console-based food ordering system in Java, allowing customers to select food items and specify the    
+                    desired quantity.  
+                </p>
+                <div class="project-links">
+                    <a href="https://github.com/yourusername/ecommerce-platform" target="_blank" class="github-link">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                    <a href="#" class="demo-link disabled">
+                        <i class="fas fa-external-link-alt"></i> Demo Coming Soon
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Projects Section Styling */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .project-card {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 30px rgba(157, 0, 255, 0.3);
+        border-color: var(--neon-pink);
+    }
+
+    .project-image {
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .project-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .project-overlay {
+        position: absolute;
+        bottom: -100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(transparent, rgba(10, 10, 10, 0.9));
+        transition: bottom 0.3s ease;
+    }
+
+    .project-card:hover .project-overlay {
+        bottom: 0;
+    }
+
+    .project-card:hover .project-image img {
+        transform: scale(1.05);
+    }
+
+    .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .tech-tags span {
+        background-color: rgba(157, 0, 255, 0.2);
+        color: var(--neon-purple);
+        padding: 0.2rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+    }
+
+    .project-info {
+        padding: 1.5rem;
+    }
+
+    .project-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        color: var(--neon-pink);
+    }
+
+    .project-description {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .project-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .github-link, .demo-link {
+        color: var(--text);
+        text-decoration: none;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        transition: all 0.3s ease;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+    }
+
+    .github-link {
+        background-color: rgba(157, 0, 255, 0.2);
+    }
+
+    .demo-link {
+        background-color: rgba(255, 0, 255, 0.2);
+    }
+
+    .github-link:hover {
+        color: var(--neon-purple);
+        background-color: rgba(157, 0, 255, 0.3);
+    }
+
+    .demo-link:hover:not(.disabled) {
+        color: var(--neon-pink);
+        background-color: rgba(255, 0, 255, 0.3);
+    }
+
+    .demo-link.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    @media (max-width: 768px) {
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+
+<!-- Certificates Section -->
+<section id="certificates">
+    <h2 class="section-title">My <span class="glow-text">Certifications</span></h2>
+    
+    <div class="certificates-container">
+        <!-- Certificate 1 -->
+        <div class="certificate-card">
+            <div class="certificate-image-container">
+                <img src="Cloud Computing.jpg" alt="Web Development Certificate" class="certificate-image">
+                <div class="certificate-overlay">
+                    <a href="Cloud Computing.pdf" target="_blank" class="view-button">
+                        <i class="fas fa-expand"></i> Enlarge
+                    </a>
+                </div>
+            </div>
+            <div class="certificate-details">
+                <h3>Cloud Computing</h3>
+                <p class="certificate-org">
+                    <i class="fas fa-building"></i> NPTEL
+                </p>
+                <p class="certificate-date">
+                    <i class="fas fa-calendar-alt"></i> Issued: Nov 15
+                </p>
+                <div class="certificate-links">
+                    <a href="Cloud Computing.pdf" download class="download-link">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                    <a href="https://archive.nptel.ac.in/noc/B2C/candidate_login/candidate_scores.php?courseid=noc24-cs118" class="verify-link">
+                        <i class="fas fa-shield-alt"></i> Verify Online
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificate 2 -->
+        <div class="certificate-card">
+            <div class="certificate-image-container">
+                <img src="certificate2-screenshot.jpg" alt="Hackathon Certificate" class="certificate-image">
+                <div class="certificate-overlay">
+                    <a href="certificate2-full.jpg" target="_blank" class="view-button">
+                        <i class="fas fa-expand"></i> Enlarge
+                    </a>
+                </div>
+            </div>
+            <div class="certificate-details">
+                <h3>Hackathon</h3>
+                <p class="certificate-org">
+                    <i class="fas fa-building"></i> Webathon
+                </p>
+                <p class="certificate-date">
+                    <i class="fas fa-calendar-alt"></i> Issued: Sept 13
+                </p>
+                <div class="certificate-links">
+                    <a href="certificate2.pdf" download class="download-link">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                    <a href="#" class="verify-link">
+                        <i class="fas fa-shield-alt"></i> Verify Online
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificate 3 -->
+        <div class="certificate-card">
+            <div class="certificate-image-container">
+                <img src="DP_Greedy Algorithm.png" alt="Cloud Computing Certificate" class="certificate-image">
+                <div class="certificate-overlay">
+                    <a href="Coursera D7TC6HB2WCZA.pdf" target="_blank" class="view-button">
+                        <i class="fas fa-expand"></i> Enlarge
+                    </a>
+                </div>
+            </div>
+            <div class="certificate-details">
+                <h3>Dynamic Programming,Greedy Algorithms</h3>
+                <p class="certificate-org">
+                    <i class="fas fa-building"></i> Coursera
+                </p>
+                <p class="certificate-date">
+                    <i class="fas fa-calendar-alt"></i> Issued: April 18
+                </p>
+                <div class="certificate-links">
+                    <a href="Coursera D7TC6HB2WCZA.pdf" download class="download-link">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                    <a href="https://www.coursera.org/account/accomplishments/certificate/D7TC6HB2WCZA" class="verify-link">
+                        <i class="fas fa-shield-alt"></i> Verify Online
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Certificates Section Styling */
+    #certificates {
+        padding: 4rem 10%;
+        background-color: rgba(10, 10, 10, 0.7);
+    }
+
+    .certificates-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .certificate-card {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .certificate-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 25px rgba(157, 0, 255, 0.3);
+        border-color: var(--neon-purple);
+    }
+
+    .certificate-image-container {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .certificate-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .certificate-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .certificate-card:hover .certificate-overlay {
+        opacity: 1;
+    }
+
+    .certificate-card:hover .certificate-image {
+        transform: scale(1.05);
+    }
+
+    .view-button {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .view-button:hover {
+        background: var(--neon-pink);
+        transform: scale(1.1);
+    }
+
+    .certificate-details {
+        padding: 1.5rem;
+    }
+
+    .certificate-details h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        color: var(--neon-pink);
+    }
+
+    .certificate-org,
+    .certificate-date {
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .certificate-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .download-link,
+    .verify-link {
+        color: var(--text);
+        text-decoration: none;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        transition: color 0.3s ease;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+    }
+
+    .download-link {
+        background-color: rgba(157, 0, 255, 0.2);
+    }
+
+    .verify-link {
+        background-color: rgba(255, 0, 255, 0.2);
+    }
+
+    .download-link:hover {
+        color: var(--neon-purple);
+        background-color: rgba(157, 0, 255, 0.3);
+    }
+
+    .verify-link:hover {
+        color: var(--neon-pink);
+        background-color: rgba(255, 0, 255, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        .certificates-container {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+
+<!-- Single Training Section -->
+<section id="training">
+    <h2 class="section-title">Summer <span class="glow-text">Training</span></h2>
+    
+    <div class="training-card">
+        <!-- Training Header -->
+        <div class="training-header">
+            <h3>Data Structure and Algorithm</h3>
+            <span class="training-date">June 21</span>
+        </div>
+        
+        <!-- Training Content -->
+        <div class="training-content">
+            <div class="training-details">
+                <p class="training-company">
+                    <i class="fas fa-building"></i> Board Infinity
+                </p>
+                <p class="training-description">
+                    Learnt basic to advanced data structure and algorithm with the help programming language CPP and used the 
+                    algorithm to implement the different sorting and searching algorithms for solving complex problems.  
+                </p>
+                <div class="skills-gained">
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">DSA</span>
+                </div>
+            </div>
+            
+            <!-- Certificate Display -->
+            <div class="certificate-display">
+                <div class="certificate-image-container">
+                    <img src="Board Inifinity.png" alt="Web Development Certificate" 
+                         class="certificate-image">
+                    <div class="certificate-overlay">
+                        <a href="BI-20240731-4452736.pdf" target="_blank" class="view-button">
+                            <i class="fas fa-search-plus"></i> Enlarge
+                        </a>
+                    </div>
+                </div>
+                <div class="certificate-links">
+                    <a href="BI-20240731-4452736.pdf" download class="download-link">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Training Section Styles */
+    #training {
+        padding: 4rem 10%;
+        background-color: rgba(10, 10, 10, 0.7);
+    }
+
+    .training-card {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        border-left: 4px solid var(--neon-pink);
+        padding: 2rem;
+        max-width: 900px;
+        margin: 0 auto;
+        box-shadow: 0 0 20px rgba(157, 0, 255, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .training-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 30px rgba(157, 0, 255, 0.2);
+    }
+
+    .training-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 1rem;
+    }
+
+    .training-header h3 {
+        font-size: 1.5rem;
+        color: var(--neon-purple);
+        margin: 0;
+    }
+
+    .training-date {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    .training-content {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .training-details {
+        flex: 1;
+    }
+
+    .training-company {
+        color: var(--neon-pink);
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .training-description {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .skills-gained {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .skill-tag {
+        background-color: rgba(157, 0, 255, 0.2);
+        color: var(--neon-purple);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+    }
+
+    .certificate-display {
+        width: 300px;
+        flex-shrink: 0;
+    }
+
+    .certificate-image-container {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .certificate-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .certificate-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .certificate-image-container:hover .certificate-overlay {
+        opacity: 1;
+    }
+
+    .certificate-image-container:hover .certificate-image {
+        transform: scale(1.05);
+    }
+
+    .view-button {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.2);
+        transition: background 0.3s ease;
+    }
+
+    .view-button:hover {
+        background: var(--neon-pink);
+    }
+
+    .certificate-links {
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    .download-link {
+        color: var(--text);
+        text-decoration: none;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: color 0.3s ease;
+    }
+
+    .download-link:hover {
+        color: var(--neon-purple);
+    }
+
+    @media (max-width: 768px) {
+        .training-content {
+            flex-direction: column;
+        }
+        
+        .certificate-display {
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+    }
+</style>
+
+<!-- Achievements Section -->
+<section id="achievements">
+    <h2 class="section-title">My <span class="glow-text">Achievements</span></h2>
+    <div class="achievements-container">
+        <!-- Achievement 1 -->
+        <div class="achievement-card">
+            <div class="achievement-badge">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <div class="achievement-content">
+                <h3>Top 17,000 - Naukri Campus Dsa and Aptitude Round</h3>
+                <p class="achievement-date">May 2024</p>
+                <p class="achievement-description">
+                    Secured a position in top 17000 out of 5,50,000 participants in Naukri Campus Dsa and Aptitude Round 
+                </p>
+                <div class="achievement-certificate">
+                    <a href="young_turks_round_1_achievement.pdf" target="_blank" class="certificate-link">
+                        <i class="fas fa-certificate"></i> View Certificate
+                    </a>
+                    <a href="young_turks_round_1_achievement.pdf" download="naukri_campus_certificate.pdf" class="download-link">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievement 2 -->
+        <div class="achievement-card">
+            <div class="achievement-badge">
+                <i class="fas fa-medal"></i>
+            </div>
+            <div class="achievement-content">
+                <h3>TechGig C++ Quiz Competition</h3>
+                <p class="achievement-date">December 2024</p>
+                <p class="achievement-description">
+                   Secured a position in top 300 out of 28,000 participants in TechGig C++ quiz Competition
+                </p>
+                <div class="achievement-certificate">
+                    <a href="certificates/google_developer_certificate.pdf" target="_blank" class="certificate-link">
+                        <i class="fas fa-certificate"></i> View Certificate
+                    </a>
+                    <a href="certificates/google_developer_certificate.pdf" download="google_developer_certificate.pdf" class="download-link">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+    <h2 class="section-title">Get In <span class="glow-text">Touch</span></h2>
+    <div class="contact-container">
+        <div class="contact-info">
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Phone</h3>
+                    <p>+91 6306094611</p>
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Email</h3>
+                    <p>abhi2002upadhyay@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Location</h3>
+                    <p>Jalandhar,Punjab,India</p>
+                </div>
+            </div>
+            
+            <div class="contact-social">
+                <h3>Connect With Me</h3>
+                <div class="social-icons">
+                    <a href="https://github.com/Abhishek12221419" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/abhishek-upadhyay-vats" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://twitter.com/abhishek_24022" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/abhishekupadhyay.24" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-form">
+            <h3>Send Me a Message</h3>
+            <form>
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
